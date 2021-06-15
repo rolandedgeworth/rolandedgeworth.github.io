@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.baidu.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":24,"offset":18,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本章讲解组件（component）相关的基本使用方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VueCli Level 1：Component 组件使用">
+<meta property="og:url" content="http://www.baidu.com/2021/04/26/component-02/index.html">
+<meta property="og:site_name" content="front-end Web developer">
+<meta property="og:description" content="本章讲解组件（component）相关的基本使用方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-26T03:53:24.000Z">
+<meta property="article:modified_time" content="2021-04-26T09:54:43.942Z">
+<meta property="article:author" content="Rol E">
+<meta property="article:tag" content="VueCli">
+<meta property="article:tag" content="components">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.baidu.com/2021/04/26/component-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VueCli Level 1：Component 组件使用 | front-end Web developer</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">front-end Web developer</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-documentation">
+
+    <a href="/documentation/" rel="section"><i class="fa fa-book documentation fa-fw"></i>相关文档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.baidu.com/2021/04/26/component-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_01.jpg">
+      <meta itemprop="name" content="Rol E">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="front-end Web developer">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VueCli Level 1：Component 组件使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-26 11:53:24 / 修改时间：17:54:43" itemprop="dateCreated datePublished" datetime="2021-04-26T11:53:24+08:00">2021-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueCli/" itemprop="url" rel="index"><span itemprop="name">VueCli</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/components/" itemprop="url" rel="index"><span itemprop="name">components</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本章讲解组件（component）相关的基本使用方式</p>
+<span id="more"></span>
+
+<h1 id="组件的引用"><a href="#组件的引用" class="headerlink" title="组件的引用"></a>组件的引用</h1><p>假设一个 <code>list.vue</code> 组件，这是一个列表性质的页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 第一步，引入</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> ListItem <span class="keyword">from</span> <span class="string">&quot;./components/ListItem.vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name: <span class="string">&quot;list&quot;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        listData: [</span><br><span class="line">          &#123;</span><br><span class="line"><span class="javascript">            id: <span class="string">&quot;00001&quot;</span>,</span></span><br><span class="line"><span class="javascript">            name: <span class="string">&quot;名称01&quot;</span>,</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line"><span class="javascript">            id: <span class="string">&quot;00002&quot;</span>,</span></span><br><span class="line"><span class="javascript">            name: <span class="string">&quot;名称02&quot;</span>,</span></span><br><span class="line">          &#125;,</span><br><span class="line">        ],</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    components: &#123;</span><br><span class="line"><span class="javascript">      <span class="comment">// 第二步，注册（声明）</span></span></span><br><span class="line">      ListItem,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 第三步,使用 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list-item</span> <span class="attr">v-for</span>=<span class="string">&quot;item in listData&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我将 <code>script</code> 标签放到了最上面，一般我们并不这样写，但为了便于理解，在这里使用这样的方式进行表达</p>
+<p>示例中已使用注释进行了说明，一个组件的使用分为三步：引入、注册和使用，值得注意的是第二步，<code>import</code> 引入后，需要在 <code>components</code> 中进行注册，示例中的 “<code>components: &#123;listItem&#125;</code>” 是一种简写，全写应为 “<code>components: &#123;listItem: listItem&#125;</code>”，左侧的 listItem 是键名，右侧的 ListItem 是取值，它在第一步（import）时被声明</p>
+<p>另外，当一个组件被注册后，就可以在 template 中使用了，使用时可以将注册时使用的驼峰命名转为短横线命名，<code>&lt;ListItem&gt;</code> 或 <code>&lt;list-item&gt;</code>，没有区别</p>
+<h1 id="组件的封装"><a href="#组件的封装" class="headerlink" title="组件的封装"></a>组件的封装</h1><h2 id="页面性质"><a href="#页面性质" class="headerlink" title="页面性质"></a>页面性质</h2><p>日常开发工作中，我们接触最多的页面有三大类：列表、表单、详情</p>
+<p>在功能上，它们有着本质上的区别，但从开发角度讲，这些页面其实十分相似，它们是一个容器，或者称为平台，它们存储主要（也是绝大多数的）数据，它们容纳功能性组件，并将它们限制在一个独立的空间内</p>
+<p>在我的理解内，这一类型的页面应该是这样的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;base-list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">      &lt;功能A&gt;&lt;/功能A&gt;</span><br><span class="line">      &lt;功能B&gt;&lt;/功能B&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> 功能A <span class="keyword">from</span> <span class="string">&quot;./功能A.vue&quot;</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> 功能B <span class="keyword">from</span> <span class="string">&quot;./功能B.vue&quot;</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        listData: [],</span><br><span class="line">        searchData: &#123;&#125;,</span><br><span class="line">        form: &#123;&#125;,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    components:&#123;</span><br><span class="line">      功能A, 功能B</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">  .base-list &#123;</span><br><span class="line"><span class="css">    <span class="comment">/* .... */</span></span></span><br><span class="line">  &#125;</span><br><span class="line">  .container &#123;</span><br><span class="line"><span class="css">    <span class="comment">/* .... */</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个容器，包裹着各种或大或小的功能，为我们开发时提供一个缓冲，避免一个文件千行代码的情况出现<br>当然，对于某些功能十分简单的页面，就不必将其再次拆分，直接将页面与功能结合到一个组件中即可</p>
+<h2 id="功能性质"><a href="#功能性质" class="headerlink" title="功能性质"></a>功能性质</h2><p>本文所提到的功能型组件，是指那些提供某种业务性功能的组件，大到多步式表单的某一页，小到一个基本的输入框，当你在开发时感到某一页状态太多，方法太繁杂，不要犹豫，将它拆开，即使拆分后的组件毫无复用性，即使拆分后这一页可能只剩寥寥几十行代码，也要拆开，否则当三五个月之后，Leader 叫你修改某项功能时，你很可能不得不对自己的代码进行重构</p>
+<p>页面型组件可以较为单一，但功能型组件必然是极具多样性的，它们要涵盖产品经理提出的一切花样</p>
+<p>一般来说，项目初期，甚至在开始前，就要有一两个人去关注产品需求，去逐页查看 UI 设计，他们要将那些细小却随处可见的基础型功能抽离，封装为一个个全局组件，即使使用了 UI 框架进行开发，样式上的大幅度修改，或基于框架进行二次封装，也是必不可少的环节。这一过程基本完成后，其余开发人员介入，进行具体业务性质的开发，基于一个个全局的、高复用性的组件，再次封装局部组件</p>
+<p>举个例子：我在全局封装了一个输入框，”<code>my-input</code>“ 组件，之后，我封装了一个包含十个输入项的 “<code>base-form</code>” 组件，和一个包含十五个输入项的 “<code>educational-form</code>” 组件，最后将这两个 form 组件放进了一个名为 “<code>personalInfoEdit</code>” 的页面组件中</p>
+<p>这里的 “<code>educational-form</code>” 组件和 “<code>base-form</code>” 组件，从功能来看，其代码必然是复杂且冗长的，同时它们大概率只在 personalInfoEdit，即个人信息编辑页面中有应用，不会再被第二个模块所需要，但对它们进行抽离，将其独立为一个组件，仍然是有价值、有意义的，这样做</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VueCli/" rel="tag"># VueCli</a>
+              <a href="/tags/components/" rel="tag"># components</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/26/component-01/" rel="prev" title="VueCli Level 1：Component 概念性说明">
+      <i class="fa fa-chevron-left"></i> VueCli Level 1：Component 概念性说明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/26/component-03/" rel="next" title="VueCli Level 1：Component 数据传递">
+      VueCli Level 1：Component 数据传递 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">组件的引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B0%81%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">组件的封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%B4%A8"><span class="nav-number">2.1.</span> <span class="nav-text">页面性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">功能性质</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rol E"
+      src="/images/avatar_01.jpg">
+  <p class="site-author-name" itemprop="name">Rol E</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-bug"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roland_Edgeworth</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
